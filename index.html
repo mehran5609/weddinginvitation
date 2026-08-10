@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Wedding Invitation Prototype</title>
+    <title>Wedding Invitation</title>
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Amiri (Arabic), Great Vibes (Script), Cinzel (Serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Great+Vibes&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        emerald: { 900: '#022c22', 950: '#011c16' },
-                        gold: { 400: '#f3e5ab', 500: '#d4af37' }
+                        cream: '#FDFBF7',
+                        gold: { DEFAULT: '#B8860B', dark: '#906B08' }
                     },
                     fontFamily: {
                         arabic: ['Amiri', 'serif'],
+                        script: ['Great Vibes', 'cursive'],
                         serif: ['Cinzel', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
@@ -28,12 +31,11 @@
     </script>
     <style>
         body { 
-            background-color: #022c22; 
-            color: #f3e5ab; 
+            background-color: #FDFBF7; 
+            color: #B8860B; 
+            /* Subtle paper texture */
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
             -webkit-font-smoothing: antialiased;
-        }
-        .bg-pattern {
-            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d4af37" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
         }
         #overlay {
             transition: opacity 0.8s ease, visibility 0.8s ease;
@@ -42,22 +44,24 @@
             opacity: 0;
             visibility: hidden;
         }
-        .text-divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: rgba(212, 175, 55, 0.5);
+        /* Custom gold divider lines */
+        .gold-line {
+            height: 1px;
+            flex-grow: 1;
+            background-color: #B8860B;
+            opacity: 0.3;
         }
-        .text-divider::before, .text-divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        /* CSS trick to turn a black transparent PNG into gold */
+        .gold-flower-filter {
+            filter: invert(56%) sepia(61%) saturate(710%) hue-rotate(10deg) brightness(95%) contrast(87%) opacity(0.6);
         }
-        .text-divider::before { margin-right: 1em; }
-        .text-divider::after { margin-left: 1em; }
     </style>
 </head>
-<body class="bg-emerald-900 bg-pattern font-sans overflow-hidden overflow-x-hidden w-full" id="body">
+<body class="font-serif overflow-hidden overflow-x-hidden w-full relative" id="body">
+         
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Floral_corner_ornament_2.svg/512px-Floral_corner_ornament_2.svg.png" 
+         class="fixed bottom-0 right-0 w-48 md:w-72 gold-flower-filter pointer-events-none rotate-180 z-0" 
+         alt="Floral Corner">
 
     <!-- Background Music -->
     <audio id="bg-music" loop>
@@ -65,84 +69,94 @@
     </audio>
 
     <!-- Welcome Overlay -->
-    <div id="overlay" class="fixed inset-0 z-50 bg-emerald-950 flex flex-col items-center justify-center text-gold-400 h-[100dvh] w-full">
-        <div class="text-6xl text-gold-500 mb-6 font-arabic">?</div>
-        <h1 class="font-serif text-xl md:text-3xl mb-12 tracking-[0.2em] text-center px-4 uppercase">You Are Invited</h1>
-        <button onclick="enterSite()" class="border border-gold-500 text-gold-500 hover:bg-gold-500 hover:text-emerald-900 px-8 md:px-10 py-3 md:py-4 rounded-full transition duration-500 font-serif tracking-widest uppercase text-xs md:text-sm">
-            Tap to Open
+    <div id="overlay" class="fixed inset-0 z-50 bg-cream flex flex-col items-center justify-center text-gold h-[100dvh] w-full" style="background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');">
+        <div class="text-6xl mb-6 font-arabic">?</div>
+        <h1 class="font-serif text-xl md:text-2xl mb-12 tracking-[0.2em] text-center px-4 uppercase">You Are Invited</h1>
+        <button onclick="enterSite()" class="border border-gold text-gold hover:bg-gold hover:text-white px-10 py-4 rounded-full transition duration-500 font-serif tracking-widest uppercase text-sm">
+            Tap to Open Invitation
         </button>
     </div>
 
     <!-- Main Website Content -->
-    <div id="main-content" class="opacity-0 transition-opacity duration-1000 ease-in-out w-full">
+    <div id="main-content" class="opacity-0 transition-opacity duration-1000 ease-in-out w-full min-h-screen relative z-10 flex flex-col items-center pt-20 pb-16 px-5">
         
-        <!-- Hero Section -->
-        <header class="min-h-[60dvh] md:min-h-[70vh] flex flex-col items-center justify-center text-center px-4 pt-16 md:pt-10">
-            <h1 data-aos="zoom-in" data-aos-duration="2000" class="font-serif text-4xl md:text-7xl font-bold mb-4 text-gold-500 leading-tight">
-                [Sister's Name] <br> 
-                <span class="text-2xl md:text-3xl italic font-arabic text-gold-400/80 my-3 md:my-4 block">&</span> 
+        <!-- Intro & Parent Text -->
+        <div data-aos="fade-down" data-aos-duration="1500" class="text-center w-full max-w-2xl mx-auto mb-12">
+            <div class="flex items-center justify-center gap-4 mb-8">
+                <div class="gold-line"></div>
+                <span class="text-sm tracking-widest uppercase">In the name of Allah</span>
+                <div class="gold-line"></div>
+            </div>
+            
+            <p class="text-base md:text-lg font-light leading-relaxed mb-6">
+                Mr. & Mrs. [Parents' Names]<br>
+                Joyfully request the honor of your presence to celebrate the marriage of their beloved daughter
+            </p>
+        </div>
+
+        <!-- The Couple -->
+        <div data-aos="zoom-in" data-aos-duration="2000" class="text-center mb-16 w-full">
+            <h1 class="font-script text-7xl md:text-8xl text-gold mb-2 leading-tight">
+                [Sister's Name]
+            </h1>
+            
+            <div class="flex items-center justify-center gap-4 my-6 w-1/2 mx-auto">
+                <div class="gold-line"></div>
+                <span class="text-sm tracking-widest uppercase font-arabic italic">&</span>
+                <div class="gold-line"></div>
+            </div>
+            
+            <h1 class="font-script text-7xl md:text-8xl text-gold mb-4 leading-tight">
                 [Groom's Name]
             </h1>
-        </header>
+            <p class="text-xs md:text-sm font-light mt-4 uppercase tracking-widest">
+                Son of Mr. & Mrs. [Groom's Parents' Names]
+            </p>
+        </div>
 
-        <!-- Traditional Text Section -->
-        <section class="py-10 md:py-12 px-5 md:px-6 max-w-3xl mx-auto text-center" data-aos="fade-up" data-aos-duration="1500">
+        <!-- Events Section (Nikkah & Walima) -->
+        <div class="w-full max-w-4xl mx-auto grid md:grid-cols-2 gap-8 mb-16">
             
-            <div class="text-divider font-serif text-lg md:text-xl mb-8 md:mb-10 tracking-widest">In the name of Allah</div>
+            <!-- Nikkah Card -->
+            <div data-aos="fade-up" data-aos-duration="1200" class="border border-gold/30 bg-cream/80 p-8 rounded-xl text-center backdrop-blur-sm shadow-sm">
+                <h3 class="font-script text-4xl mb-4 text-gold-dark">The Nikkah</h3>
+                <div class="w-16 h-[1px] bg-gold/30 mx-auto mb-6"></div>
+                <p class="mb-2 text-sm tracking-widest uppercase">Saturday, 15th May 2026</p>
+                <p class="mb-6 text-sm tracking-widest uppercase">At 10:30 AM</p>
+                <p class="font-light leading-relaxed">Central Juma Masjid<br>Mavoor, Kerala</p>
+            </div>
+            
+            <!-- Walima Card -->
+            <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200" class="border border-gold/30 bg-cream/80 p-8 rounded-xl text-center backdrop-blur-sm shadow-sm">
+                <h3 class="font-script text-4xl mb-4 text-gold-dark">The Walima</h3>
+                <div class="w-16 h-[1px] bg-gold/30 mx-auto mb-6"></div>
+                <p class="mb-2 text-sm tracking-widest uppercase">Saturday, 15th May 2026</p>
+                <p class="mb-6 text-sm tracking-widest uppercase">At 7:00 PM</p>
+                <p class="font-light leading-relaxed">The Grand Palace<br>Memories Garden, Mavoor</p>
+            </div>
 
-            <div class="space-y-5 md:space-y-6 text-base md:text-lg font-light leading-relaxed text-gold-400">
-                <p>
-                    Mr. & Mrs. [Parents' Names]<br>
-                    Request the honor of your presence and blessings at the auspicious marriage ceremony of their beloved daughter
-                </p>
-                <p class="font-serif text-xl md:text-2xl text-gold-500 py-1 md:py-2">[Sister's Full Name]</p>
-                <p>
-                    With
-                </p>
-                <p class="font-serif text-xl md:text-2xl text-gold-500 py-1 md:py-2">[Groom's Full Name]</p>
-                <p class="text-xs md:text-sm">
-                    (Son of Mr. & Mrs. [Groom's Parents' Names])
-                </p>
-                <p class="pt-5 md:pt-6 border-t border-gold-500/20 w-5/6 md:w-3/4 mx-auto mt-6 md:mt-8">
-                    Insha'Allah, we look forward to sharing this joyous occasion with you and your family. Your presence will multiply our happiness.
-                </p>
-            </div>
-        </section>
+        </div>
 
-        <!-- Events Section -->
-        <section class="py-12 md:py-16 px-4 md:px-6 max-w-5xl mx-auto overflow-hidden">
-            <div class="grid md:grid-cols-2 gap-8 md:gap-10">
-                <!-- Nikkah Card -->
-                <div data-aos="fade-up" data-aos-duration="1200" class="bg-emerald-950/90 border border-gold-500/20 p-6 md:p-10 rounded-2xl text-center backdrop-blur-md shadow-2xl">
-                    <h3 class="font-serif text-2xl md:text-3xl text-gold-500 mb-4 md:mb-6 border-b border-gold-500/20 pb-3 md:pb-4">The Nikkah</h3>
-                    <p class="mb-2 md:mb-3 text-base md:text-lg"><strong>Date:</strong> Tuesday, Dec 15th, 2026</p>
-                    <p class="mb-4 md:mb-5 text-base md:text-lg"><strong>Time:</strong> 10:30 AM</p>
-                    <p class="mb-2 text-gold-400/70 font-light leading-relaxed text-sm md:text-base">Central Juma Masjid<br>Kerala, India</p>
-                </div>
-                
-                <!-- Walima Card -->
-                <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200" class="bg-emerald-950/90 border border-gold-500/20 p-6 md:p-10 rounded-2xl text-center backdrop-blur-md shadow-2xl">
-                    <h3 class="font-serif text-2xl md:text-3xl text-gold-500 mb-4 md:mb-6 border-b border-gold-500/20 pb-3 md:pb-4">The Walima</h3>
-                    <p class="mb-2 md:mb-3 text-base md:text-lg"><strong>Date:</strong> Tuesday, Dec 15th, 2026</p>
-                    <p class="mb-4 md:mb-5 text-base md:text-lg"><strong>Time:</strong> 7:00 PM</p>
-                    <p class="mb-2 text-gold-400/70 font-light leading-relaxed text-sm md:text-base">Grand Convention Center<br>Kerala, India</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Footer / Best Compliments -->
-        <footer class="py-12 md:py-20 text-center px-4" data-aos="fade-up" data-aos-duration="1200">
-            <div class="max-w-2xl mx-auto border border-gold-500/30 p-6 md:p-8 rounded-xl bg-emerald-950/50">
-                <h4 class="font-serif text-lg md:text-xl text-gold-500 mb-3 md:mb-4 uppercase tracking-widest">With Best Compliments From</h4>
-                <p class="text-base md:text-lg font-light text-gold-400">
-                    Muhammed Mehran & Family<br>
-                    Relatives & Friends
+        <!-- Outro & Best Compliments -->
+        <footer data-aos="fade-up" data-aos-duration="1200" class="text-center w-full max-w-2xl mx-auto">
+            <p class="pt-6 border-t border-gold/20 w-3/4 mx-auto mb-12 text-sm md:text-base font-light leading-relaxed">
+                Insha'Allah, we look forward to sharing this joyous occasion with you and your family.
+            </p>
+            
+            <div class="mb-12">
+                <h4 class="font-serif text-sm md:text-base mb-3 uppercase tracking-widest text-gold-dark">With Best Compliments From</h4>
+                <p class="text-base md:text-lg font-script text-4xl mt-4">
+                    Muhammed Mehran & Family
                 </p>
             </div>
-            <div class="mt-12 md:mt-16 inline-block border-t border-b border-gold-500/20 py-4 md:py-6 px-10 md:px-16">
-                 <p class="font-arabic text-2xl md:text-3xl text-gold-400">????? ???</p>
+            
+            <div class="flex items-center justify-center gap-4">
+                <div class="gold-line"></div>
+                <p class="font-arabic text-3xl">????? ???</p>
+                <div class="gold-line"></div>
             </div>
         </footer>
+
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -156,7 +170,6 @@
             
             document.getElementById('overlay').classList.add('fade-out');
             
-            // Re-enable scrolling but keep X hidden
             var body = document.getElementById('body');
             body.classList.remove('overflow-hidden');
             body.classList.add('overflow-x-hidden');
@@ -164,10 +177,9 @@
             var mainContent = document.getElementById('main-content');
             mainContent.classList.remove('opacity-0');
             
-            // Initialize AOS
             setTimeout(function() {
                 AOS.init({ 
-                    once: true, // Only animate once to prevent mobile jumpiness
+                    once: true, 
                     offset: 30, 
                     duration: 1000 
                 });
