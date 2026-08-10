@@ -47,6 +47,22 @@
         }
     </script>
     <style>
+
+        .last-page {
+              position: relative;
+              min-height: 100vh;
+         }
+
+        .instagram-watermark {
+              position: absolute;
+              bottom: 30px;
+              left: 50%;
+              transform: translateX(-50%);
+              color: rgba(0, 0, 0, 0.4);
+              font-size: 16px;
+              font-weight: 500;
+        }
+        
         body { 
             background-color: #FDFBF7; 
             color: #B8860B; 
@@ -233,5 +249,9 @@
             }, 500);
         }
     </script>
+    <div class="last-page">
+  <!-- Your last-page content -->
+  <div class="instagram-watermark">@yourinstagram</div>
+</div>
 </body>
 </html>
