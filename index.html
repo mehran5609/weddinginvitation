@@ -9,8 +9,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Google Fonts: Amiri (Arabic), Great Vibes (Script), Cinzel (Serif) -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Great+Vibes&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Great Vibes (Script), Cinzel (Serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -19,10 +19,9 @@
                     colors: {
                         cream: '#FDFBF7',
                         gold: { DEFAULT: '#B8860B', dark: '#906B08' },
-                        brown: { dark: '#3E2723' } /* Deep rich brown */
+                        brown: { dark: '#3E2723' }
                     },
                     fontFamily: {
-                        arabic: ['Amiri', 'serif'],
                         script: ['Great Vibes', 'cursive'],
                         serif: ['Cinzel', 'serif'],
                     }
@@ -50,6 +49,11 @@
             background-color: #B8860B;
             opacity: 0.3;
         }
+        /* Blends the image perfectly into the cream website */
+        .img-blend {
+            mix-blend-mode: multiply;
+            opacity: 0.85;
+        }
     </style>
 </head>
 <body class="font-serif overflow-hidden overflow-x-hidden w-full relative bg-cream" id="body">
@@ -67,7 +71,10 @@
 
     <!-- Welcome Overlay -->
     <div id="overlay" class="fixed inset-0 z-50 bg-cream flex flex-col items-center justify-center text-gold h-[100dvh] w-full" style="background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');">
-        <div class="text-6xl mb-6 font-arabic">?</div>
+        
+        <!-- BISMILLAH IMAGE (Overlay) -->
+        <img src="IMG_1769.png" alt="Bismillah" class="w-64 md:w-80 mb-8 img-blend">
+        
         <h1 class="font-serif text-xl md:text-2xl mb-12 tracking-[0.2em] text-center px-4 uppercase">You Are Invited</h1>
         <button onclick="enterSite()" class="border border-gold text-gold hover:bg-gold hover:text-white px-10 py-4 rounded-full transition duration-500 font-serif tracking-widest uppercase text-sm cursor-pointer relative z-50">
             Tap to Open Invitation
@@ -77,6 +84,11 @@
     <!-- Main Website Content -->
     <div id="main-content" class="opacity-0 transition-opacity duration-1000 ease-in-out w-full min-h-screen relative z-10 flex flex-col items-center pt-20 pb-16 px-5">
         
+        <!-- BISMILLAH IMAGE (Main Content) -->
+        <div data-aos="fade-down" data-aos-duration="1500" class="w-full flex justify-center mb-10">
+            <img src="IMG_1769.png" alt="Bismillah" class="w-64 md:w-96 img-blend">
+        </div>
+
         <!-- Intro & Parent Text -->
         <div data-aos="fade-down" data-aos-duration="1500" class="text-center w-full max-w-2xl mx-auto mb-12">
             <div class="flex items-center justify-center gap-4 mb-8">
@@ -99,7 +111,7 @@
             
             <div class="flex items-center justify-center gap-4 my-6 w-1/2 mx-auto">
                 <div class="gold-line"></div>
-                <span class="text-sm tracking-widest uppercase font-arabic italic">&</span>
+                <span class="text-sm tracking-widest uppercase italic font-serif">&</span>
                 <div class="gold-line"></div>
             </div>
             
@@ -147,10 +159,10 @@
                 </p>
             </div>
             
-            <div class="flex items-center justify-center gap-4 bg-cream/70 py-2 px-6 rounded-full backdrop-blur-md mx-auto w-max border border-gold/10">
-                <div class="w-8 h-[1px] bg-gold/50"></div>
-                <p class="font-arabic text-3xl">????? ???</p>
-                <div class="w-8 h-[1px] bg-gold/50"></div>
+            <div class="flex items-center justify-center gap-4 bg-cream/70 py-4 px-6 md:px-8 rounded-full backdrop-blur-md mx-auto w-max border border-gold/10">
+                <div class="w-6 md:w-12 h-[1px] bg-gold/50"></div>
+                <p class="font-serif text-xs md:text-sm uppercase tracking-[0.2em] text-gold-dark font-medium">Please Keep Us In Your Dua's</p>
+                <div class="w-6 md:w-12 h-[1px] bg-gold/50"></div>
             </div>
         </footer>
 
