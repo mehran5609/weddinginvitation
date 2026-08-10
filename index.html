@@ -18,7 +18,8 @@
                 extend: {
                     colors: {
                         cream: '#FDFBF7',
-                        gold: { DEFAULT: '#B8860B', dark: '#906B08' }
+                        gold: { DEFAULT: '#B8860B', dark: '#906B08' },
+                        brown: { dark: '#3E2723' } /* Deep rich brown */
                     },
                     fontFamily: {
                         arabic: ['Amiri', 'serif'],
@@ -33,7 +34,6 @@
         body { 
             background-color: #FDFBF7; 
             color: #B8860B; 
-            /* Subtle paper texture */
             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
             -webkit-font-smoothing: antialiased;
         }
@@ -44,20 +44,21 @@
             opacity: 0;
             visibility: hidden;
         }
-        /* Custom gold divider lines */
         .gold-line {
             height: 1px;
             flex-grow: 1;
             background-color: #B8860B;
             opacity: 0.3;
         }
-        /* CSS trick to turn a black transparent PNG into gold */
-        .gold-flower-filter {
-            filter: invert(56%) sepia(61%) saturate(710%) hue-rotate(10deg) brightness(95%) contrast(87%) opacity(0.6);
-        }
     </style>
 </head>
-<body class="font-serif overflow-hidden overflow-x-hidden w-full relative" id="body">
+<body class="font-serif overflow-hidden overflow-x-hidden w-full relative bg-cream" id="body">
+
+    <!-- Top Right Corner: Dark Brown & Gold Shade -->
+    <div class="fixed -top-32 -right-32 w-80 md:w-[30rem] h-80 md:h-[30rem] bg-gradient-to-bl from-brown-dark to-gold rounded-full blur-[80px] opacity-40 pointer-events-none z-0"></div>
+         
+    <!-- Bottom Left Corner: Dark Brown & Gold Shade -->
+    <div class="fixed -bottom-32 -left-32 w-80 md:w-[30rem] h-80 md:h-[30rem] bg-gradient-to-tr from-brown-dark to-gold rounded-full blur-[80px] opacity-40 pointer-events-none z-0"></div>
 
     <!-- Background Music -->
     <audio id="bg-music" loop>
@@ -68,7 +69,7 @@
     <div id="overlay" class="fixed inset-0 z-50 bg-cream flex flex-col items-center justify-center text-gold h-[100dvh] w-full" style="background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');">
         <div class="text-6xl mb-6 font-arabic">?</div>
         <h1 class="font-serif text-xl md:text-2xl mb-12 tracking-[0.2em] text-center px-4 uppercase">You Are Invited</h1>
-        <button onclick="enterSite()" class="border border-gold text-gold hover:bg-gold hover:text-white px-10 py-4 rounded-full transition duration-500 font-serif tracking-widest uppercase text-sm">
+        <button onclick="enterSite()" class="border border-gold text-gold hover:bg-gold hover:text-white px-10 py-4 rounded-full transition duration-500 font-serif tracking-widest uppercase text-sm cursor-pointer relative z-50">
             Tap to Open Invitation
         </button>
     </div>
@@ -80,11 +81,11 @@
         <div data-aos="fade-down" data-aos-duration="1500" class="text-center w-full max-w-2xl mx-auto mb-12">
             <div class="flex items-center justify-center gap-4 mb-8">
                 <div class="gold-line"></div>
-                <span class="text-sm tracking-widest uppercase">In the name of Allah</span>
+                <span class="text-sm tracking-widest uppercase text-gold-dark font-medium">In the name of Allah</span>
                 <div class="gold-line"></div>
             </div>
             
-            <p class="text-base md:text-lg font-light leading-relaxed mb-6">
+            <p class="text-base md:text-lg font-light leading-relaxed mb-6 text-gold-dark">
                 Mr. & Mrs. [Parents' Names]<br>
                 Joyfully request the honor of your presence to celebrate the marriage of their beloved daughter
             </p>
@@ -105,51 +106,51 @@
             <h1 class="font-script text-7xl md:text-8xl text-gold mb-4 leading-tight">
                 [Groom's Name]
             </h1>
-            <p class="text-xs md:text-sm font-light mt-4 uppercase tracking-widest">
+            <p class="text-xs md:text-sm font-light mt-4 uppercase tracking-widest text-gold-dark">
                 Son of Mr. & Mrs. [Groom's Parents' Names]
             </p>
         </div>
 
-        <!-- Events Section (Nikkah & Walima) -->
-        <div class="w-full max-w-4xl mx-auto grid md:grid-cols-2 gap-8 mb-16">
+        <!-- Events Section -->
+        <div class="w-full max-w-4xl mx-auto grid md:grid-cols-2 gap-8 mb-16 relative z-20">
             
             <!-- Nikkah Card -->
-            <div data-aos="fade-up" data-aos-duration="1200" class="border border-gold/30 bg-cream/80 p-8 rounded-xl text-center backdrop-blur-sm shadow-sm">
+            <div data-aos="fade-up" data-aos-duration="1200" class="border border-gold/40 bg-cream/80 p-8 rounded-xl text-center backdrop-blur-md shadow-lg">
                 <h3 class="font-script text-4xl mb-4 text-gold-dark">The Nikkah</h3>
-                <div class="w-16 h-[1px] bg-gold/30 mx-auto mb-6"></div>
-                <p class="mb-2 text-sm tracking-widest uppercase">Saturday, 15th May 2026</p>
-                <p class="mb-6 text-sm tracking-widest uppercase">At 10:30 AM</p>
-                <p class="font-light leading-relaxed">Central Juma Masjid<br>Mavoor, Kerala</p>
+                <div class="w-16 h-[1px] bg-gold/50 mx-auto mb-6"></div>
+                <p class="mb-2 text-sm tracking-widest uppercase text-gold-dark">Saturday, 15th May 2026</p>
+                <p class="mb-6 text-sm tracking-widest uppercase text-gold-dark">At 10:30 AM</p>
+                <p class="font-light leading-relaxed text-gold-dark">Central Juma Masjid<br>Mavoor, Kerala</p>
             </div>
             
             <!-- Walima Card -->
-            <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200" class="border border-gold/30 bg-cream/80 p-8 rounded-xl text-center backdrop-blur-sm shadow-sm">
+            <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200" class="border border-gold/40 bg-cream/80 p-8 rounded-xl text-center backdrop-blur-md shadow-lg">
                 <h3 class="font-script text-4xl mb-4 text-gold-dark">The Walima</h3>
-                <div class="w-16 h-[1px] bg-gold/30 mx-auto mb-6"></div>
-                <p class="mb-2 text-sm tracking-widest uppercase">Saturday, 15th May 2026</p>
-                <p class="mb-6 text-sm tracking-widest uppercase">At 7:00 PM</p>
-                <p class="font-light leading-relaxed">The Grand Palace<br>Memories Garden, Mavoor</p>
+                <div class="w-16 h-[1px] bg-gold/50 mx-auto mb-6"></div>
+                <p class="mb-2 text-sm tracking-widest uppercase text-gold-dark">Saturday, 15th May 2026</p>
+                <p class="mb-6 text-sm tracking-widest uppercase text-gold-dark">At 7:00 PM</p>
+                <p class="font-light leading-relaxed text-gold-dark">The Grand Palace<br>Memories Garden, Mavoor</p>
             </div>
 
         </div>
 
         <!-- Outro & Best Compliments -->
-        <footer data-aos="fade-up" data-aos-duration="1200" class="text-center w-full max-w-2xl mx-auto">
-            <p class="pt-6 border-t border-gold/20 w-3/4 mx-auto mb-12 text-sm md:text-base font-light leading-relaxed">
+        <footer data-aos="fade-up" data-aos-duration="1200" class="text-center w-full max-w-2xl mx-auto relative z-20">
+            <p class="pt-6 border-t border-gold/30 w-3/4 mx-auto mb-12 text-sm md:text-base font-light leading-relaxed text-gold-dark bg-cream/70 rounded-full px-4">
                 Insha'Allah, we look forward to sharing this joyous occasion with you and your family.
             </p>
             
-            <div class="mb-12">
+            <div class="mb-12 bg-cream/70 py-6 px-4 rounded-xl backdrop-blur-md border border-gold/20 shadow-sm">
                 <h4 class="font-serif text-sm md:text-base mb-3 uppercase tracking-widest text-gold-dark">With Best Compliments From</h4>
                 <p class="text-base md:text-lg font-script text-4xl mt-4">
                     Muhammed Mehran & Family
                 </p>
             </div>
             
-            <div class="flex items-center justify-center gap-4">
-                <div class="gold-line"></div>
+            <div class="flex items-center justify-center gap-4 bg-cream/70 py-2 px-6 rounded-full backdrop-blur-md mx-auto w-max border border-gold/10">
+                <div class="w-8 h-[1px] bg-gold/50"></div>
                 <p class="font-arabic text-3xl">????? ???</p>
-                <div class="gold-line"></div>
+                <div class="w-8 h-[1px] bg-gold/50"></div>
             </div>
         </footer>
 
@@ -161,7 +162,7 @@
             var audio = document.getElementById("bg-music");
             audio.volume = 0.3;
             audio.play().catch(function(error) {
-                console.log("Audio play failed.", error);
+                console.log("Audio play failed. Browser may require stricter interaction.", error);
             });
             
             document.getElementById('overlay').classList.add('fade-out');
